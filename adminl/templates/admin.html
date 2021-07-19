@@ -1,0 +1,108 @@
+{% extends 'navbar.html' %} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'index.css' %}">
+
+<body>
+
+    <body>
+        <section id="top">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+                <a class="navbar-brand head" href="">School Management System</a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+        </section>
+
+          {% for error in messages %}
+
+
+        <div id="message2" class="alert alert-warning alert-dismissible fade show" style="text-align: center;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{error}}</strong>
+        </div>
+
+        {% endfor %}
+
+        <!-- ============================================================================================================================== -->
+
+
+        <section id="middle">
+            <div id="particles-js"></div>
+            <div class="container">
+            <script src="{% static '/js/particles.js' %}"></script>
+            <script src="{% static '/js/app.js' %}"></script>
+            <h1>Add More Teachers</h1>
+                <div class="newsletter context">
+                    <form action="tadder" method="POST">
+                        {% csrf_token %}
+                        <div class="input-icons">
+                            <i class="fas fa-envelope"></i>
+                            <input type="text" class="input" name="emailadd" placeholder="Enter Email">
+                        </div>
+                        <button type="submit" name="add" value="add" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+            
+        </section>
+
+
+
+        <!-- ============================================================================================================================== -->
+
+
+        <section id="bottom">
+            <table class="table table-hover table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for mm in ls %}
+                        <tr>
+                            <td> <img src="{% static '/img/profile.png' %}" alt="profile"> </td>
+                           <td> {{mm.Name}}</td>
+                            <td>{{mm.Email}} </td>
+                            {% if mm.Activate %}
+                            <td><button type="button" class="btn btn-success">Active</button></td>
+                            {% else %}
+                            <td><button type="button" class="btn btn-danger">Inactive</button></td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </body>
+
+
+
+
+
+
+
+    {% endblock content %}
