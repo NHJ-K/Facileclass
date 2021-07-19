@@ -1,5 +1,6 @@
-*.env
+*env
 *.env.Include
 *.env.Lib
 *.env.Scripts
 *.env.pyvenv.cfg
+.__pycache__
