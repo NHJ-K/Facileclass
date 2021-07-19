@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from main.models import *
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect 
+from main.sendmail import *
 # Create your views here.
 
 def adminp(response):
@@ -23,6 +24,10 @@ def addteach(request):
                     if not user_info.objects.filter(Email=T_mail).exists():
                         ps = teacher_info(Email=T_mail)
                         ps.save()
+                        SUBJECT = "Activate your Account"
+                        TEXT = "Follow the link to activate your Account"
+                        message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
+                        l = mailsender(T_mail,message)
                         ls = teacher_info.objects.all()
                         return HttpResponseRedirect('/adminl')
                     else:

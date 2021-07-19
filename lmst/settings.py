@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+WEBURL = 'http://localhost:8000'
 
 # Application definition
 
