@@ -8,4 +8,6 @@ urlpatterns = [
     path('adminl/',include("adminl.urls")),
     path('teachl/',include("teachl.urls")),
     path('studl/',include("userl.urls")),
+    path('activate',actrender),
+    path('activetea',activate),
 ]

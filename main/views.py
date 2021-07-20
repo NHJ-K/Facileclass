@@ -56,3 +56,21 @@ def login(response):
                 return redirect('/')
     return render(response,"home.html")
 
+def actrender(request):
+    return render(request,"mailvar.html")
+
+def activate(request):
+    if request.method == 'POST':
+        if request.POST.get("teachersubmit"):
+            mail = request.POST.get("U_mail")
+            if teacher_info.objects.filter(Email=mail).exists():
+                to = teacher_info.objects.get(Email=mail)
+                if to.Activate == False:
+                    name = request.POST.get("U_name1")
+                    password = request.POST.get("pass2")
+                    to.update(Name=name,passwords=password,Activate=True)
+                    messages.success(request,'Account Activated')
+                    return redirect('/')
+                else:
+                    messages.error(request,'Account already activated')
+                    return redirect('/')

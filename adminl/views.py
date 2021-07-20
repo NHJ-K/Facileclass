@@ -25,7 +25,7 @@ def addteach(request):
                         ps = teacher_info(Email=T_mail)
                         ps.save()
                         SUBJECT = "Activate your Account"
-                        TEXT = "Follow the link to activate your Account"
+                        TEXT = "Follow the link to activate your Account \n http://127.0.0.1:8000/activate"
                         message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
                         l = mailsender(T_mail,message)
                         ls = teacher_info.objects.all()
