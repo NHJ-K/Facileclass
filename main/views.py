@@ -61,16 +61,14 @@ def actrender(request):
 
 def activate(request):
     if request.method == 'POST':
+        mail = request.POST.get("U_email")
         if request.POST.get("teachersubmit"):
-            mail = request.POST.get("U_mail")
             if teacher_info.objects.filter(Email=mail).exists():
-                to = teacher_info.objects.get(Email=mail)
-                if to.Activate == False:
-                    name = request.POST.get("U_name1")
-                    password = request.POST.get("pass2")
-                    to.update(Name=name,passwords=password,Activate=True)
-                    messages.success(request,'Account Activated')
-                    return redirect('/')
-                else:
-                    messages.error(request,'Account already activated')
-                    return redirect('/')
+                name = request.POST.get("U_name1")
+                password = request.POST.get("U_password1")
+                teacher_info.objects.filter(Email=mail).update(Name=name,passwords=password,Activate=True)
+                messages.success(request,"Activated")
+                return redirect('/')
+            else:
+                messages.error(request, "Email not Found contact site administrator")
+    return redirect('/')
