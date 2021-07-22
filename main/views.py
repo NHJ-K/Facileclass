@@ -44,7 +44,7 @@ def login(response):
                     return redirect('/teachl')
                 else:
                     messages.error(response,'Password Incorrect')
-                    return redirected('/')
+                    return redirect('/')
             elif user_info.objects.filter(Email=email).exists():
                 to = user_info.objects.get(Email=email)
                 if to.passwords == password:

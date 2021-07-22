@@ -4,6 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 
 def teacp(response):
+    email = response.session['mail']
+    
     return render(response,"teacher.html")
     
   
