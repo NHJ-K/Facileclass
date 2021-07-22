@@ -42,9 +42,6 @@
         <a href="#" class="float">
             <i class="fa fa-plus my-float"></i>
         </a>
-        {% if context.ls == null%}
-        <h4>No rooms found Create new</h4>
-        {%endif%}
       {% for mm in context.ls %}
         <a href='m/{{mm.roomcode}}'>
             <section>
@@ -70,5 +67,8 @@
                 </div>
             </section>
             {% endfor %}
+            {% if context.ls == null%}
+                <h4>No rooms found Create new</h4>
+            {%endif%}
   </body>
 </html>

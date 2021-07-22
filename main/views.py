@@ -28,19 +28,19 @@ def login(response):
             password = response.POST.get("UL_pass")
             if admin_info.objects.filter(Email = email).exists():
                 to = admin_info.objects.get(Email=email)
-                response.session['mail'] = email
                 if to.passwords == password:
+                    response.session['mail'] = email
                     return redirect('/adminl')
                 else:
                     messages.error(response,'Password incorrect')
                     return redirect('/')
             elif teacher_info.objects.filter(Email=email).exists():
                 to = teacher_info.objects.get(Email=email)
-                response.session['mail'] = email
                 if to.Activate == False:
                     messages.error(response,'Account is not Activated')
                     return redirect('/')
                 if to.passwords == password:
+                    response.session['mail'] = email
                     return redirect('/teachl')
                 else:
                     messages.error(response,'Password Incorrect')
@@ -48,6 +48,7 @@ def login(response):
             elif user_info.objects.filter(Email=email).exists():
                 to = user_info.objects.get(Email=email)
                 if to.passwords == password:
+                    response.session['mail'] = email
                     return redirect('/studl')
                 else:
                     messages.error(response,'Password incorrect')
