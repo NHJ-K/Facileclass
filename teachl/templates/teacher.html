@@ -66,9 +66,8 @@
                     </div>
                 </div>
             </section>
-            {% endfor %}
-            {% if context.ls == null%}
+            {% empty %}
                 <h4>No rooms found Create new</h4>
-            {%endif%}
+            {% endfor %}
   </body>
 </html>

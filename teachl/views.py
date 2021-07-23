@@ -8,18 +8,18 @@ from teachl.models import *
 
 def teacp(response):
     email = response.session['mail']
+    print(email)
     pi = teacher_info.objects.filter(Email=email)
     ls = roominfo.objects.filter(Email=email)
     print(ls)
     context = {
         'ls':ls
     }
-    return render(response,"teacher.html")
+    return render(response,"teacher.html",{'context' : context})
     
   
     
 def logout(response):   
-    print("hi")
     response.session.flush()
     return HttpResponseRedirect('/')
 
