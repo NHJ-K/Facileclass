@@ -4,5 +4,6 @@ from .views import *
 
 urlpatterns = [
     path('',teacp),
-    path('logout',logout,name="logout")
+    path('logout',logout,name="logout"),
+    path('create',createclass),
 ]

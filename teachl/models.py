@@ -12,7 +12,7 @@ def gencode():
             return code
 
 class roominfo(models.Model):
-    Email=models.CharField(max_length=50)
+    Email=models.CharField(max_length=50,unique=True)
     roomcode=models.CharField(default=gencode,max_length=7,primary_key=True)
     roomname=models.CharField(max_length=100)
     roomdesc=models.CharField(max_length=200)

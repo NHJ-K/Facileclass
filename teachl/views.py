@@ -34,3 +34,6 @@ def gencode():
         code = ''.join(secrets.choice(string.ascii_letters) for x in range(n))
         if not roominfo.objects.filter(roomcode=code).exists() :
             return code
+
+def createclass(request):
+    return render(request,"crclass.html")
