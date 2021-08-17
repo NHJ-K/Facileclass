@@ -17,3 +17,7 @@ class roominfo(models.Model):
     roomname=models.CharField(max_length=100)
     roomdesc=models.CharField(max_length=200)
     date=models.DateTimeField(auto_now_add=True)
+
+
+class googlecreds(models.Model):
+    pass

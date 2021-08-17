@@ -45,4 +45,11 @@ def createclass(request):
             to = roominfo(Email=mail,roomname=classname,roomdesc=descr)
             to.save()
             return redirect('/teachl')
+
+
+def topicv(request,cod):
+    mail = request.session['mail']
+    if teacher_info.objects.filter(Email=mail).exists():
+        if roominfo.objects.filter(roomcode=cod).exists():
+            return render(request,"roomp.html")
     

@@ -19,7 +19,7 @@ def login(response):
             elif teacher_info.objects.filter(Email=email):
                 return redirect('/teachl')
             elif user_info.objects.filter(Email=email):
-                return redirect('studl')
+                return redirect('/studl')
         except KeyError:
             pass
     if response.method == 'POST':

@@ -17,6 +17,13 @@ img {
     height: 100%;
 }
 
+.btn {
+    margin-top: 25px;
+}
+
+.rounded-circle {
+    width:50;
+}
 
 .file {
     position: relative;
