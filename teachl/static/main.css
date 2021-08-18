@@ -1,0 +1,10 @@
+.v1_5 {
+  width: 37px;
+  height: 36px;
+  background: url("img/userg.jpg");
+  opacity: 1;
+  position:relative;
+  top: 9px;
+  left: 826px;
+  border-radius: 50%;
+}

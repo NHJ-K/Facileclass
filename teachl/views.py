@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 import string
 from main.models import teacher_info
 from teachl.models import *
+import google_apis_oauth
+import os
 
 # Create your views here.
 
@@ -52,4 +54,10 @@ def topicv(request,cod):
     if teacher_info.objects.filter(Email=mail).exists():
         if roominfo.objects.filter(roomcode=cod).exists():
             return render(request,"roomp.html")
-    
+
+def googleauth(request):
+    REDIRECT_URI = "http://127.0.0.1:8000/gauth/callback"
+    SCOPES = ['https://www.googleapis.com/auth/drive.file']
+    JSON_FILEPATH = os.path.join(os.getcwd(), 'client_id.json')
+    oauth_url = google_apis_oauth.get_authorization_url(JSON_FILEPATH, SCOPES, REDIRECT_URI)
+    return HttpResponseRedirect(oauth_url)
