@@ -9,4 +9,5 @@ urlpatterns = [
     path('createc',createclass),
     path('m/<str:cod>',topicv),
     path('gauth',googleauth),
+    path('gauth/callback',CallbackV),
 ]

@@ -10,6 +10,7 @@ class admin_info(models.Model):
 
 class teacher_info(models.Model):
     Name = models.CharField(max_length=50,unique=False,blank=False)
+    isAuthenticated = models.BooleanField(default=False)
     Email = models.CharField(max_length=100,unique=True,blank=False,editable=True)
     passwords = models.CharField(max_length=100,unique=False,blank=False,editable=True)
     Activate = models.BooleanField(default=False)

@@ -5,6 +5,9 @@ from main.models import teacher_info
 from teachl.models import *
 import google_apis_oauth
 import os
+from main.models import teacher_info
+from django.contrib import messages 
+from django.contrib.messages.api import error
 
 # Create your views here.
 
@@ -61,3 +64,8 @@ def googleauth(request):
     JSON_FILEPATH = os.path.join(os.getcwd(), 'client_id.json')
     oauth_url = google_apis_oauth.get_authorization_url(JSON_FILEPATH, SCOPES, REDIRECT_URI)
     return HttpResponseRedirect(oauth_url)
+
+def CallbackV(request):
+    teacher_info.isAuthenticated = True
+    messages.error(request, "Authenticated")
+    return redirect('/')
