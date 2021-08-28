@@ -5,6 +5,7 @@ from main.models import teacher_info
 from teachl.models import *
 import google_apis_oauth
 import os
+from .form import DocumentForm
 from main.models import teacher_info
 from django.contrib import messages 
 from django.contrib.messages.api import error
@@ -54,9 +55,27 @@ def createclass(request):
 
 def topicv(request,cod):
     mail = request.session['mail']
+    ls = roominfo.objects.filter(roomcode=cod)
+    message = "You are in room " 
+    context = {
+        'ls':ls
+    }
     if teacher_info.objects.filter(Email=mail).exists():
         if roominfo.objects.filter(roomcode=cod).exists():
-            return render(request,"roomp.html")
+            if request.method == 'POST':
+                form = DocumentForm(request.POST,request.FILES)
+                if form.is_valid():
+                    newdoc = Document(roomcode=cod,docfile=request.FILES['docfile'])
+                    newdoc.save()
+                    print("seet")
+                    return HttpResponseRedirect('/teachl/m/{cod}')
+                else:
+                   message = "Upload failed"
+            else:
+                form = DocumentForm()
+            documents = Document.objects.filter(roomcode=cod)
+            context = {'documents':documents,'form':form,'code':cod,'message':message}
+            return render(request,"roomp.html",context)
 
 def googleauth(request):
     REDIRECT_URI = "http://127.0.0.1:8000/gauth/callback"
@@ -69,3 +88,5 @@ def CallbackV(request):
     teacher_info.isAuthenticated = True
     messages.error(request, "Authenticated")
     return redirect('/')
+
+

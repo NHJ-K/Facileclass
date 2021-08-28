@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{%load static%}
+{% load static  %}
 <html>
     <head>
         <meta charset="utf-8">
@@ -14,10 +14,11 @@
         <link href="{%static 'main.css'%}" rel="stylesheet" />
         <link href="{%static 'style2.css'%}" rel="stylesheet" />
     </head>
+
     <body>
         <section id="top">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand head" href="">School Management System</a>
+                <a class="navbar-brand head" href="/">School Management System</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -34,5 +35,32 @@
                 </div>
             </nav>
         </section>
+        <!-- List of uploaded documents -->
+        {{message}}
+
+        <!-- Upload form. Note enctype attribute! -->
+        <form action="/teachl/m/{{code}}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+
+            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+
+            <p>
+                {{ form.docfile.errors }}
+                {{ form.docfile }}
+            </p>
+
+            <p><input type="submit" value="Upload"/></p>
+        </form>
+        {% if documents %}
+            All documents in the database:
+            <ul>
+                {% for document in documents %}
+                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No documents.</p>
+        {% endif %}
     </body>
 </html>
