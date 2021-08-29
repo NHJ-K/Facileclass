@@ -24,4 +24,4 @@ class googlecreds(models.Model):
 
 class Document(models.Model):
     roomcode=models.CharField(default=gencode,max_length=7)
-    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+    docfile = models.FileField(upload_to='documents')

@@ -56,7 +56,7 @@ def createclass(request):
 def topicv(request,cod):
     mail = request.session['mail']
     ls = roominfo.objects.filter(roomcode=cod)
-    message = "You are in room " 
+    message = "You are in room" 
     context = {
         'ls':ls
     }
@@ -67,8 +67,8 @@ def topicv(request,cod):
                 if form.is_valid():
                     newdoc = Document(roomcode=cod,docfile=request.FILES['docfile'])
                     newdoc.save()
-                    print("seet")
-                    return HttpResponseRedirect('/teachl/m/{cod}')
+                    
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
                 else:
                    message = "Upload failed"
             else:
