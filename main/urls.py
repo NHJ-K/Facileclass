@@ -1,6 +1,6 @@
 from django.urls import path,include
 from .views import *
-from teachl.views import CallbackV
+from teachl.views import *
 
 urlpatterns = [
     path('',home),
@@ -10,5 +10,5 @@ urlpatterns = [
     path('studl/',include("userl.urls")),
     path('activate',actrender),
     path('activetea',activate),
-    path('gauth/callback',CallbackV),
+    #path('gauth/callback',CallbackV),
 ]

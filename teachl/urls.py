@@ -7,8 +7,8 @@ urlpatterns = [
     path('m/logout',logout,name="logout"),
     path('create',createclass_form),
     path('createc',createclass),
-    path('m/<str:cod>',topicv,),
-    path('gauth',googleauth),
-    path('gauth/callback',CallbackV),
-    path('m/success',topicv),
+    path('m/<str:cod>/',classpass),
+    path('m/<str:cod>/<str:tcod>/add',uploader),
+    path('m/<str:cod>/tadder',topicadder),
+    #path('m/<str:cod>/delete',deletedrivefile),
 ]

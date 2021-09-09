@@ -1,0 +1,279 @@
+<html lang="en" dir="ltr">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="/path/to/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="popup-video.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="app.js"></script>
+    <script src="{% static '/js/app.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style2.css' %}">
+    <script>
+        $('#videoLink')
+            .magnificPopup({
+                type: 'inline',
+                midClick: true
+            })
+    </script>
+    
+</head>
+
+<body>
+ <script>
+            {% if  context.Glink %}
+                //var linkl = "{{link}}".replaceAll("&amp;", "&");
+                //var link2 = link1.replaceAll("&amp;", "&");
+                //console.log(link1);
+                window.open("{{context.Glink}}".replaceAll("&amp;", "&"), "", "width=600,height=400");
+            {% endif %}
+
+    
+        </script>
+    <section id="top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <a class="navbar-brand head" href="">School Management System</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </section>
+    <section id="middle">
+        <img src="banner.png" alt="banner">
+    </section>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal12">Add Topic</button>
+    <div class="modal fade" id="exampleModal12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Topic Name:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="tadder" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Topic Discription:</label>
+                            <input type="text" name="topicname" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" name="description" id="message-text"></textarea>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="tpadd" value="tpadd" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {%for mm in context.ls%}
+    <section id="bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{mm.Tpoicname}}</h3>
+                            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            {{mm.Tpoicdescrip}}<br>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{mm.UniqCode}}exampleModalCenter">Add Meterial</button> {%for pd in context.pdf%} {% if mm.UniqCode == pd.UniqCode %}
+                            <div class="card no1" style="width: 18rem;">
+                                <div class="fontawesome">
+                                    <i class="fas fa-file-pdf fa-5x"></i> {{pd.Name}}
+                                </div>
+
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong{{pd.pdf}}">load</button>
+                                    <div class="modal fade" id="exampleModalLong{{pd.pdf}}" tabindex="-1" role="dialog" style="padding-left: 30%;" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <br><iframe src="https://drive.google.com/file/d/{{pd.pdf}}/preview" width="60%" height="100%"></iframe>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {%endif%} {% endfor %} {%for youtube in context.yt%} {% if mm.UniqCode == youtube.UniqCode %}
+                            <div class="card no2" style="width: 18rem;">
+                                <div class="fontawesome">
+
+                                    <i class="fab fa-youtube fa-5x"></i>
+                                </div>
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong1{{pd.pdf}}">load</button>
+
+                                    <div class="modal fade" id="exampleModalLong1{{pd.pdf}}" tabindex="-1" style="padding-left: 28%; padding-top: 10%;" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <iframe id="player" width="603" height="339" src="{{youtube.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {%endif%} {% endfor %} {%for l in context.link%} {% if mm.UniqCode == l.UniqCode %}
+                            <div class="card no3" style="width: 18rem;">
+                                <div class="fontawesome">
+                                    <i class="fa fa-link fa-5x" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-body">
+                                    <a href="{{l.link}}" class="btn btn-primary stretched-link">Go somewhere</a>
+                                </div>
+                            </div>
+                            {% endif %} {% endfor %}
+
+
+
+
+
+                            <div class="modal fade" id="{{mm.UniqCode}}exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                                        </div>
+                                        <div class="modal-body" id="myModal">
+                                            <form action="{{mm.UniqCode}}/add" method="POST" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="file">
+                                                    <div class="file btn btn1 btn-secondary"><input type="file" name="pdffiles" required multiple > <button type="submit" class="btn btn-primary" value="pdfupload" name="pdfupload">submit</button></div>
+                                                </div>
+                                            </form>
+                                            <div class="file">
+
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                        Add Link
+                                                      </button>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal -->
+                                            <form action="{{mm.UniqCode}}/add" method="POST">
+                                                {% csrf_token %}
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Add Link</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                 <span aria-hidden="true">&times;</span>
+                                                              </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <input type="text" class="form-control" id="exampleFormControlInput1" required name="addlink" placeholder="Paste your link here ">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" value="addlinksubmit" name="addlinksubmit" class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form action="{{mm.UniqCode}}/add" method="POST">
+                                                {% csrf_token %}
+                                                <div class="file">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                                                   YouTube link
+                                                      </button>
+
+
+
+
+                                                        </div>
+                                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Youtube Link</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                         <span aria-hidden="true">&times;</span>
+                                                                      </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+
+                                                                        <input type="url" class="form-control" name='youtubevediolink' id="exampleFormControlInput1" placeholder="Paste your Youtubelink here"><br>
+                                                                        <label for="timingfield">start time</label>
+                                                                        <input type="number" min="0" max="23" value="0" name="starthour" class="form-control" id="" placeholder="H" style="width: 80px;">
+                                                                        <input type="number" min="0" max="59" value="0" name="startminit" class="form-control" id="" placeholder="M" style="width: 80px;">
+                                                                        <input type="number" min="0" max="59" value="0" name="startsecond" class="form-control" id="" placeholder="S" style="width: 80px;">
+                                                                        <label for="timingfield">Stop time</label>
+                                                                        <input type="number" min="0" max="23" value="0" name="stophoure" class="form-control" id="" placeholder="H" style="width: 80px;">
+                                                                        <input type="number" min="0" max="59" value="0" name="stopminite" class="form-control" id="" placeholder="M" style="width: 80px;">
+                                                                        <input type="number" min="0" max="59" value="0" name="stopsecond" class="form-control" id="" placeholder="S" style="width: 80px;">
+
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="submit" name="youtubelink" value="youtubelink" class="btn btn-primary">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                            </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    {%endfor%}
+</body>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="timingfield.js"></script>
+
+
+</html>

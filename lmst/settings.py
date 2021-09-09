@@ -26,9 +26,8 @@ SECRET_KEY = 'django-insecure-g)7jy)_tvuiteva=gu=@wb%az2s+l-6zk3#p-a_(-=r#l^in@7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
-WEBURL = 'http://localhost:8000'
+ALLOWED_HOSTS = ['webclasstest.herokuapp.com','classroomweb.herokuapp.com','127.0.0.1','webtestclass.herokuapp.com']
+WEBURL ='https://webclasstest.herokuapp.com/'
 
 # Application definition
 
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'adminl.apps.AdminlConfig',
     'teachl.apps.TeachlConfig',
     'userl.apps.UserlConfig',
+    'gdstorage',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +134,24 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+MEDIA_URL='media/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+
+
+GOOGLE_DRIVE_STORAGE_MEDIA_ROOT ='https://drive.google.com/drive/folders/1GBDdTPTDpwrOuaEosAdaRWnvZB5zsj4j'
+
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.path.join(BASE_DIR, "", "gdstorage.json")
+GOOGLE_DRIVE_STORAGE_SERVICE_EMAIL='web-686@webclass-323705.iam.gserviceaccount.com'
