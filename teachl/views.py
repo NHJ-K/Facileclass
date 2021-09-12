@@ -105,7 +105,7 @@ def uploader(respnce,cod,tcod):
           if respnce.POST.get('addlinksubmit'):
                savelink=respnce.POST.get('addlink')
                ls= code.objects.get(UniqCode=tcod)
-               linksave=otherlink(RoomCode=ls.url,UniqCode=ls.UniqCode,link=savelink)
+               linksave=otherlink(RoomCode=ls.RoomCode,UniqCode=ls.UniqCode,link=savelink)
                linksave.save()
                return HttpResponseRedirect(respnce.META.get('HTTP_REFERER'))
           #youthub vedio ubload
@@ -130,7 +130,7 @@ def uploader(respnce,cod,tcod):
                     vediocode= res[0:11]
                     vedifinallink="https://www.youtube.com/embed/"+vediocode+"?version=3&start="+startin+"&end="+stopin+"&autoplay=0&controls=0&rel=0&loop=1"
                ls= code.objects.get(UniqCode=tcod)
-               linksave=youtubelink(RoomCode=ls.url,UniqCode=ls.UniqCode,link=vedifinallink)
+               linksave=youtubelink(RoomCode=ls.RoomCode,UniqCode=ls.UniqCode,link=vedifinallink)
                linksave.save()
                return HttpResponseRedirect(respnce.META.get('HTTP_REFERER'))
 
