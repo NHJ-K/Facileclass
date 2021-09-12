@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from main.models import *
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect 
-from main.sendmail import *
+from main.mailsender import *
 # Create your views here.
 
 def adminp(response):
@@ -14,6 +14,14 @@ def adminp(response):
 def logout(response):   
     response.session.flush()
     return HttpResponseRedirect('/')
+def gencode():
+    n=60
+    while True:
+        code=''.join(secrets.choice(string.ascii_letters) for x in range(n))
+        if not teacher_info.objects.filter(token=code).exists():
+            if not user_info.objects.filter(token=code).exists():
+                if not admin_info.objects.filter(token=code).exists():
+                    return code
 
 def addteach(request):
     if request.method=='POST':
@@ -22,23 +30,22 @@ def addteach(request):
             if not admin_info.objects.filter(Email=T_mail).exists():
                 if not teacher_info.objects.filter(Email=T_mail).exists():
                     if not user_info.objects.filter(Email=T_mail).exists():
-                        ps = teacher_info(Email=T_mail)
+                        ps = teacher_info(Email=T_mail,token=gencode())
                         ps.save()
                         SUBJECT = "Activate your Account"
-                        TEXT = "Follow the link to activate your Account \n http://127.0.0.1:8000/activate"
+                        TEXT = "Follow the link to activate your Account "
                         message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
-                        l = mailsender(T_mail,message)
-                        ls = teacher_info.objects.all()
-                        return HttpResponseRedirect('/adminl')
+                        l = mailsender(ps.token,T_mail,message)
+                        messages.error(request,"Updated")
+                        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
                     else:
                         messages.error(request,"Email already exists")
                         ls = teacher_info.objects.all()
-                        return render(request,"admin.html",{'ls':ls})
+                        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
                 else:
                     messages.error(request,"Email already exists")
-                    ls = teacher_info.objects.all()
-                    return render(request,"admin.html",{'ls':ls})
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             else:
                 messages.error(request,"Email already exists")
                 ls = teacher_info.objects.all()
-                return render(request,"admin.html",{'ls':ls})
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

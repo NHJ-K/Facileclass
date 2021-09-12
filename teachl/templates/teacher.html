@@ -46,13 +46,14 @@
             <i class="fa fa-plus my-float"></i>
         </a>
       {% for mm in context.ls %}
-        <a href='m/{{mm.roomcode}}'>
+
             <section>
+
                 <div id="services">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-3">
-                                <a href='m/{{mm.roomcode}}' style="outline: none; text-decoration: none; color: none;">
+                                <a href='m/{{mm.url}}' style="outline: none; text-decoration: none; color: none;">
                                     <div class="card" style="width: 18rem;">
                                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW8cDzm3oxINwFArZExruUNJeLLr0kCAaJe4Swt2RnS-OTsMQBB0w8PHJDQycG4TLiZkM&usqp=CAU" class="card-img-top" alt="...">
                                         <div class="card-body">
@@ -63,12 +64,13 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </a>
+                            </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+                
             {% empty %}
                 <h4>No rooms found Create new</h4>
             {% endfor %}

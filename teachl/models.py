@@ -1,11 +1,11 @@
-from datetime import date
-from django.core.files import storage
 from django.db import models
 import string
 import secrets
-from django.db.models.base import Model
-# Create your models here.
+from django.db import models
 from gdstorage.storage import GoogleDriveStorage
+'''
+
+~~~~ serice account
 
 gd_storage = GoogleDriveStorage()
 
@@ -13,26 +13,36 @@ class Map(models.Model):
     id = models.AutoField( primary_key=True)
     map_name = models.CharField(max_length=200)
     map_data = models.FileField(upload_to='maps', storage=gd_storage)
-
+'''
+def urlcode():
+    n=15
+    while True:
+        cod=''.join(secrets.choice(string.ascii_letters) for x in range(n))
+        if roominfo.objects.filter(url=cod).count() == 0:
+            return cod
 def gencode():
     n=7
     while True:
         code=''.join(secrets.choice(string.ascii_letters) for x in range(n))
-        if roominfo.objects.filter(roomcode=code).count() == 0:
+        if roominfo.objects.filter(Roomcode=code).count() == 0:
             return code
+
 #room details
 class roominfo(models.Model):
     Email=models.CharField(max_length=50)
-    roomcode=models.CharField(default=gencode,max_length=7,primary_key=True)
+    Roomcode=models.CharField(default=gencode,max_length=7,primary_key=True)
     roomname=models.CharField(max_length=100)
+    url=models.CharField(default=urlcode,max_length=15)
     roomdesc=models.CharField(max_length=200)
     date=models.DateTimeField(auto_now_add=True)
 
+
+
 #topic specific code
 class code(models.Model):
-    RoomCode=models.CharField(max_length=7)
-    Tpoicname=models.CharField(max_length=100)
-    Tpoicdescrip=models.CharField(max_length=2000)
+    RoomCode=models.CharField(max_length=15)
+    Tpoicname=models.CharField(max_length=50)
+    Tpoicdescrip=models.CharField(max_length=200)
     UniqCode=models.CharField(max_length=10)
     date=models.DateTimeField(auto_now_add=True)
 

@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-g)7jy)_tvuiteva=gu=@wb%az2s+l-6zk3#p-a_(-=r#l^in@7
 DEBUG = True
 
 ALLOWED_HOSTS = ['webclasstest.herokuapp.com','classroomweb.herokuapp.com','127.0.0.1','webtestclass.herokuapp.com']
-WEBURL ='https://webclasstest.herokuapp.com/'
+WEBURL ='http://127.0.0.1:8000/'
 
 # Application definition
 
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'userl.apps.UserlConfig',
     'gdstorage',
 ]
-
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

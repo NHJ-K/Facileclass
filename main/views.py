@@ -2,8 +2,10 @@ from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages 
 from django.contrib.messages.api import error
+from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
+@csrf_protect
 def home(request):
     if request.session._session:
         return redirect('/login')
@@ -15,11 +17,11 @@ def login(response):
         try:
             email = response.session['mail']
             if admin_info.objects.filter(Email=email):
-                return redirect('/adminl')
+                return redirect('/adminl/')
             elif teacher_info.objects.filter(Email=email):
-                return redirect('/teachl')
+                return redirect('/teachl/')
             elif user_info.objects.filter(Email=email):
-                return redirect('/studl')
+                return redirect('/studl/')
         except KeyError:
             pass
     if response.method == 'POST':
@@ -30,7 +32,7 @@ def login(response):
                 to = admin_info.objects.get(Email=email)
                 if to.passwords == password:
                     response.session['mail'] = email
-                    return redirect('/adminl')
+                    return redirect('/adminl/')
                 else:
                     messages.error(response,'Password incorrect')
                     return redirect('/')
@@ -41,7 +43,7 @@ def login(response):
                     return redirect('/')
                 if to.passwords == password:
                     response.session['mail'] = email
-                    return redirect('/teachl')
+                    return redirect('/teachl/')
                 else:
                     messages.error(response,'Password Incorrect')
                     return redirect('/')
@@ -49,27 +51,32 @@ def login(response):
                 to = user_info.objects.get(Email=email)
                 if to.passwords == password:
                     response.session['mail'] = email
-                    return redirect('/studl')
+                    return redirect('/studl/')
                 else:
                     messages.error(response,'Password incorrect')
             else:
                 messages.error(response,'Email not found')
                 return redirect('/')
     return render(response,"home.html")
+def forgetpass(response):
+    pass
 
-def actrender(request):
-    return render(request,"mailvar.html")
+def forgetpassmailsend(respnes):
+    pass
+def activation(request,tk):
+    if user_info.objects.filter(token=tk).exists():
+        user_info.objects.filter(token=tk).update(Activate=True)
+        messages.error(request, 'Your acount is Activated')
+        return redirect('/')
 
-def activate(request):
-    if request.method == 'POST':
-        mail = request.POST.get("U_email")
-        if request.POST.get("teachersubmit"):
-            if teacher_info.objects.filter(Email=mail).exists():
-                name = request.POST.get("U_name1")
-                password = request.POST.get("U_password1")
-                teacher_info.objects.filter(Email=mail).update(Name=name,passwords=password,Activate=True)
-                messages.success(request,"Activated")
-                return redirect('/')
-            else:
-                messages.error(request, "Email not Found contact site administrator")
-    return redirect('/')
+    elif teacher_info.objects.filter(token=tk).exists():
+        teacher_info.objects.filter(token=tk).update(Activate=True)
+        messages.error(request, 'Your acount is Activated')
+        return redirect('/')
+    else:
+        messages.error(request, 'Your acount is Activated')
+        return redirect('/')
+        
+
+
+            
