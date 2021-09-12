@@ -16,7 +16,8 @@ from pydrive.drive import GoogleDrive
 
 gauth=GoogleAuth()
 
-
+global popupurl
+popupurl='0'
 def teacp(response):
     email = response.session['mail']
     ls = roominfo.objects.filter(Email=email)
@@ -53,13 +54,21 @@ def classpass(respones,cod):
                
                rcod=roominfo.objects.get(url=cod)
                print('\n',rcod.Roomcode,'\n')
-               context={
+               if not popupurl== '0':
+                    context={
+                         "pdf":contends.objects.filter(RoomCode=cod),
+                         "ls":code.objects.filter(RoomCode=cod),
+                         "yt":youtubelink.objects.filter(RoomCode=cod),
+                         "link":otherlink.objects.filter(RoomCode=cod),
+                         "popuplink":popupurl
+                         }
+               else:
+                    context={
                          "pdf":contends.objects.filter(RoomCode=cod),
                          "ls":code.objects.filter(RoomCode=cod),
                          "yt":youtubelink.objects.filter(RoomCode=cod),
                          "link":otherlink.objects.filter(RoomCode=cod)
                          }
-
                return render(respones, "innerdata.html",{'context':context})
 
 
@@ -86,7 +95,8 @@ def uploader(respnce,cod,tcod):
                for f in pdffiles: 
                     drivepassway=tempuploader(uploadfile=f,tcode=tcod) #storing the multiple pdf in temp uploader
 
-               url=Gauthcheck(respnce)
+               global popupurl
+               popupurl=Gauthcheck(respnce)
                return HttpResponseRedirect(respnce.META.get('HTTP_REFERER'))
                '''
                for f in pdffiles:
