@@ -94,7 +94,7 @@ def uploader(respnce,cod,tcod):
                pdffiles=respnce.FILES.getlist('pdffiles') #multi pdf upload
                for f in pdffiles: 
                     drivepassway=tempuploader(uploadfile=f,tcode=tcod) #storing the multiple pdf in temp uploader
-
+                    drivepassway.save()
                global popupurl
                popupurl=Gauthcheck(respnce)
                return HttpResponseRedirect(respnce.META.get('HTTP_REFERER'))
@@ -157,26 +157,29 @@ def Gauthcheck(respnce):
      return url
 
 def callback(request):
-    if request.method == 'GET':
-        code = request.GET.get('code')
-        print(code)
-        gauth.Auth(code)
+     if request.method == 'GET':
+        cod = request.GET.get('code')
+        if cod == None:
+          return render(request,'callback.html')
+        gauth.Auth(cod)
         gauth.SaveCredentialsFile('creds.json')
         drive = GoogleDrive(gauth) 
         pdffiles=tempuploader.objects.all() #geting all temp uploaded file
+        print(pdffiles)
         for f in pdffiles:
-                    ls=code.objects.get(UniqCode=f.tcode) #tcode=topic code (Unique code  a identify the topic)
-                    parernt_id=folderspcifing(ls,drive)
-                    pathfile= f.uploadfile.path
-                    gfile = drive.CreateFile({'parents': [{'id': parernt_id}]})
-                    gfile.SetContentFile(pathfile)
-                    gfile.Upload() 
-                    con=contends(RoomCode=ls.url,UniqCode=ls.UniqCode,pdf=gfile.get('id'),name=f.name) #drive file  id storing
-                    con.save()      
+          ls=code.objects.get(UniqCode=f.tcode) #tcode=topic code (Unique code  a identify the topic)
+          parernt_id=folderspcifing(ls,drive)
+          pathfile= f.uploadfile.path
+          gfile = drive.CreateFile({'parents': [{'id': parernt_id}]})
+          gfile.SetContentFile(pathfile)
+          gfile.Upload() 
+          con=contends(RoomCode=ls.RoomCode,UniqCode=ls.UniqCode,pdf=gfile.get('id'),name=f.uploadfile.name) #drive file  id storing
+          con.save()      
         pdf= tempuploader.objects.all()
         for pd in pdf:
-           pd.delete()
+          pd.delete()
         return redirect('/callback')
+     return render(request,"callback.htnl")
 
      
 
