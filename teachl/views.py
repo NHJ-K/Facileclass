@@ -95,9 +95,41 @@ def uploader(respnce,cod,tcod):
                for f in pdffiles: 
                     drivepassway=tempuploader(uploadfile=f,tcode=tcod) #storing the multiple pdf in temp uploader
                     drivepassway.save()
+          try:
+               print("try")
+               gauth.LoadCredentialsFile("creds.json")
+               if gauth.credentials is None:
+                    return HttpResponseRedirect(gauth.GetAuthUrl())
+               elif gauth.access_token_expired:
+                    print("refresh")
+                    gauth.Refresh()
+               else:
+                    print(gauth.credentials)
+                    gauth.Authorize()
+                    print("success")
+               
+               gauth.SaveCredentialsFile("creds.json")
+               drive=GoogleDrive(gauth)
+               pdffile=tempuploader.objects.all()
+               for f in pdffile:
+                    print("hi")
+                    ls=code.objects.get(UniqCode=f.tcode) #tcode=topic code (Unique code  a identify the topic)
+                    parernt_id=folderspcifing(ls,drive)
+                    pathfile= f.uploadfile.path
+                    gfile = drive.CreateFile({'parents': [{'id': parernt_id}]})
+                    gfile.SetContentFile(pathfile)
+                    print("hi2")
+                    gfile.Upload()
+                    print("updone")
+                    f.delete()
+                    print("deleted")
+                    con=contends(RoomCode=ls.RoomCode,UniqCode=ls.UniqCode,pdf=gfile.get('id'),name=f.uploadfile.name) #drive file  id storing
+                    con.save()
+               return redirect('/teachl/m/{{tcode}}')
+          except FileNotFoundError:
                global popupurl
-               popupurl=Gauthcheck(respnce)
-               return HttpResponseRedirect(respnce.META.get('HTTP_REFERER'))
+               popupurl= gauth.GetAuthUrl()
+               return HttpResponseRedirect(gauth.GetAuthUrl())
                '''
                for f in pdffiles:
                     drivepassway=tempuploader(uploadfile=f)
@@ -156,7 +188,8 @@ def Gauthcheck(respnce):
      print(url)
      return url
 
-def callback(request):
+
+def callback(request): 
      if request.method == 'GET':
         cod = request.GET.get('code')
         if cod == None:
@@ -165,7 +198,6 @@ def callback(request):
         gauth.SaveCredentialsFile('creds.json')
         drive = GoogleDrive(gauth) 
         pdffiles=tempuploader.objects.all() #geting all temp uploaded file
-        print(pdffiles)
         for f in pdffiles:
           ls=code.objects.get(UniqCode=f.tcode) #tcode=topic code (Unique code  a identify the topic)
           parernt_id=folderspcifing(ls,drive)

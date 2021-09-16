@@ -35,7 +35,7 @@
 <body>
  <script>
             {% if  context.popuplink %}
-                window.open("{{context.popuplink}}".replaceAll("&amp;", "&"), "", "width=600,height=400");
+                window.location.replace("{{context.popuplink}}");
             {% endif %}
 
 
