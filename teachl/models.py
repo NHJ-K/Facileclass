@@ -2,18 +2,9 @@ from django.db import models
 import string
 import secrets
 from django.db import models
-from gdstorage.storage import GoogleDriveStorage
-'''
 
-~~~~ serice account
 
-gd_storage = GoogleDriveStorage()
 
-class Map(models.Model):
-    id = models.AutoField( primary_key=True)
-    map_name = models.CharField(max_length=200)
-    map_data = models.FileField(upload_to='maps', storage=gd_storage)
-'''
 def urlcode():
     n=15
     while True:

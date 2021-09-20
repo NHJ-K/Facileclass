@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'adminl.apps.AdminlConfig',
     'teachl.apps.TeachlConfig',
     'userl.apps.UserlConfig',
-    'gdstorage',
 ]
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
@@ -153,7 +152,3 @@ EMAIL_PORT = 587
 
 
 
-GOOGLE_DRIVE_STORAGE_MEDIA_ROOT ='https://drive.google.com/drive/folders/1GBDdTPTDpwrOuaEosAdaRWnvZB5zsj4j'
-
-GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.path.join(BASE_DIR, "", "gdstorage.json")
-GOOGLE_DRIVE_STORAGE_SERVICE_EMAIL='web-686@webclass-323705.iam.gserviceaccount.com'
