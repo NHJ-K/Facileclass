@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_protect
 def home(request):
     if request.session._session:
         return redirect('/login')
-    return render(request,"home.html")
+    return render(request,"index.html")
 
 
 def login(response):

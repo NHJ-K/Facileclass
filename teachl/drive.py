@@ -1,6 +1,6 @@
 from django.db import models
 from pydrive.auth import GoogleAuth
-from pydrive2.drive import GoogleDrive
+from pydrive.drive import GoogleDrive
 from .models import contends
 
 
