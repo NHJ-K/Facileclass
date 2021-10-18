@@ -13,9 +13,10 @@
       <div class="box">
         <div class="inner-box">
           <div class="forms-wrap">
-            <form action="index.html" autocomplete="off" class="sign-in-form">
+            <form action="\login"  method="POST" autocomplete="off" class="sign-in-form">
+              {% csrf_token %}
               <div class="logo">
-                <img src="./img/logo.png" alt="easyclass" />
+                <img src="{% static '/img/logo.png' %}" alt="easyclass" />
                 <h4>facileclass</h4>
               </div>
 
@@ -28,13 +29,15 @@
               <div class="actual-form">
                 <div class="input-wrap">
                   <input
-                    type="text"
+                    type="email"
                     minlength="4"
                     class="input-field"
                     autocomplete="off"
                     required
+                    name="UL_email"
+                    id="exampleInputEmail1"
                   />
-                  <label>Name</label>
+                  <label>Email</label>
                 </div>
 
                 <div class="input-wrap">
@@ -44,11 +47,13 @@
                     class="input-field"
                     autocomplete="off"
                     required
+                    name="UL_pass"
+                    id="exampleInputPassword1"
                   />
                   <label>Password</label>
                 </div>
 
-                <input type="submit" value="Sign In" class="sign-btn" />
+                <input type="submit" name="signin" value="signin" class="sign-btn" />
 
                 <p class="text">
                   Forgotten your password or you login datails?
@@ -59,7 +64,7 @@
 
             <form action="index.html" autocomplete="off" class="sign-up-form">
               <div class="logo">
-                <img src="./img/logo.png" alt="easyclass" />
+                <img src="{% static '/img/logo.png' %}" alt="easyclass" />
                 <h4>easyclass</h4>
               </div>
 

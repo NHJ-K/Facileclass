@@ -57,7 +57,7 @@ def login(response):
             else:
                 messages.error(response,'Email not found')
                 return redirect('/')
-    return render(response,"home.html")
+    return render(response,"index.html")
 def forgetpass(response):
     pass
 
