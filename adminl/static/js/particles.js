@@ -6,7 +6,7 @@
 /* How to use? : Check the GitHub README
 /* v2.0.0
 /* ----------------------------------------------- */
-
+console.log("particles.js");
 var pJS = function(tag_id, params){
 
     var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');

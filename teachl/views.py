@@ -19,12 +19,15 @@ gauth=GoogleAuth()
 global popupurl
 popupurl='0'
 def teacp(response):
-    email = response.session['mail']
-    ls = roominfo.objects.filter(Email=email)
-    context = {
-        'ls':ls
-    }
-    return render(response,"teacher.html",{'context' : context})
+     try:
+          email = response.session['mail']
+          ls = roominfo.objects.filter(Email=email)
+          context = {
+               'ls':ls
+          }
+          return render(response,"teacher.html",{'context' : context})
+     except KeyError:
+          return HttpResponseRedirect('/')
     
 
     

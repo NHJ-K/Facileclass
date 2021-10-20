@@ -6,9 +6,12 @@ from main.mailsender import *
 # Create your views here.
 
 def adminp(response):
-    ls=teacher_info.objects.all()
-    return render(response,"admin.html",{'ls':ls})
-    
+    try:
+        mail = response.session['mail']
+        ls=teacher_info.objects.all()
+        return render(response,"admin.html",{'ls':ls})
+    except KeyError:
+        return HttpResponseRedirect('/')
   
     
 def logout(response):   
