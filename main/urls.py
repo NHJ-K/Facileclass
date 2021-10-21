@@ -8,6 +8,7 @@ urlpatterns = [
     path('adminl/',include("adminl.urls")),
     path('teachl/',include("teachl.urls")),
     path('studl/',include("userl.urls")),
-    path('<str:tk>',activation)
+    path('acti/<str:tk>',activation),
+    path('active',activatea,name="activatea"),
     #path('gauth/callback',CallbackV),
 ]

@@ -63,19 +63,30 @@ def forgetpass(response):
 
 def forgetpassmailsend(respnes):
     pass
-def activation(request,tk):
-    if user_info.objects.filter(token=tk).exists():
-        user_info.objects.filter(token=tk).update(Activate=True)
-        messages.error(request, 'Your acount is Activated')
-        return redirect('/')
 
-    elif teacher_info.objects.filter(token=tk).exists():
-        teacher_info.objects.filter(token=tk).update(Activate=True)
-        messages.error(request, 'Your acount is Activated')
-        return redirect('/')
-    else:
-        messages.error(request, 'Your acount is Activated')
-        return redirect('/')
+def activation(request,tk):
+    return render(request,"mailvar.html")
+
+def activatea(request):
+    print('activate')
+    if request.method == 'POST':
+        email = request.POST.get("U_email")
+        name = request.POST.get("U_name1")
+        passwrd = request.POST.get("U_password1")
+        if user_info.objects.filter(Email=email).exists():
+            user_info.objects.filter(Email=email).update(Activate=True,passwords=passwrd,Name=name)
+            messages.error(request, 'Your acount is Activated')
+            request.session['mail'] = email
+            return redirect('studl/')
+        elif teacher_info.objects.filter(Email=email).exists():
+            teacher_info.objects.filter(Email=email).update(Activate=True,passwords=passwrd,Name=name)
+            messages.error(request, 'Your acount is Activated')
+            request.session['mail'] = email
+            return redirect('teachl/')
+        else:
+            messages.error(request, 'Email not found Contact Admin')
+            return redirect('/')
+    return render(request,"mailvar.html")
         
 
 

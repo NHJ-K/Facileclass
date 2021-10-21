@@ -10,6 +10,12 @@
   </head>
   <body>
     <main>
+      {% for error in messages %}
+        <div id="message2" class="alert alert-warning alert-dismissible "  style="text-align: center;">
+            <a href="/" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{error}}</strong>
+        </div>
+      {% endfor %}
       <div class="box">
         <div class="inner-box">
           <div class="forms-wrap">
