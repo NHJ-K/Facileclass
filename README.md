@@ -2,6 +2,14 @@
  
 ## Setup Instructions
 
+### Setup Virtual Environment
+
+```bash
+pip install virtualenv
+py -m venv env
+.\env\Scripts\activate
+```      
+
 ### Install Required Python Modules
 
 ```bash

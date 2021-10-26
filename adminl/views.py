@@ -12,11 +12,11 @@ def adminp(response):
         return render(response,"admin.html",{'ls':ls})
     except KeyError:
         return HttpResponseRedirect('/')
-  
-    
+
 def logout(response):   
     response.session.flush()
     return HttpResponseRedirect('/')
+
 def gencode():
     n=60
     while True:
