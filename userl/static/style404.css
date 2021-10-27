@@ -1,0 +1,85 @@
+p, h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    background: #f3f3f3;
+}
+
+.error-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.error-wrapper .title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000;
+}
+
+.error-wrapper .info {
+    font-size: 14px;
+}
+
+.man-icon {
+    background: url('https://www.hotstar.com/assets/b5e748831c911ca02f9c07afc11f2ae5.svg') center center no-repeat;
+    display: inline-block;
+    height: 110px;
+    width: 118px;
+    margin-bottom: 16px;
+} 
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.btn-round {
+    border-radius: 30px !important;
+    text-decoration: none;
+}
+
+.btn {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 9px 25px;
+    border-width: 2px;
+    box-shadow: 0 3px 8px 0 rgba(41, 49, 89, .15), inset 0 0 0 1px hsla(0, 0%, 100%, .1);
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}

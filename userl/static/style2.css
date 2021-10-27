@@ -1,0 +1,131 @@
+.row {
+    margin-top: 40px;
+    padding: 0 10px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.panel-heading span {
+    margin-top: -20px;
+    font-size: 15px;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.btn {
+    margin-top: 25px;
+}
+
+.rounded-circle {
+    width:50;
+}
+
+.file {
+    position: relative;
+}
+
+.form-group {
+    padding-top: 15px;
+}
+
+.fas {
+    width: 5px;
+}
+
+.fontawesome {
+    margin-left: 62.5px;
+    margin-top: 25px;
+}
+
+.stretched-link {
+    margin-left: 22.5px;
+}
+
+.card {
+    margin-top: 10px;
+}
+
+.no2 {
+    left: 228px;
+    bottom: 191px;
+}
+
+.no3 {
+    left: 448px;
+    bottom: 381px;
+}
+
+.bdp-input {
+    border-radius: 2px;
+    padding: 0 3px;
+    border: 1px solid rgba(34, 36, 38, .15);
+    cursor: pointer;
+}
+
+.bdp-input.disabled {
+    color: #AAA;
+    cursor: default;
+}
+
+.bdp-popover {
+    min-width: 110px;
+}
+
+.bdp-popover input {
+    display: inline;
+    margin-bottom: 3px;
+    width: 60px;
+}
+
+.bdp-block {
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    padding: 5px 3px;
+}
+
+.bdp-label {
+    font-size: 70%;
+}
+
+.container {
+    padding-top: 80px;
+}
+.head {
+    font-size: 25px;
+}
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	margin-top:22px;
+}
+.row {
+    margin-top: 40px;
+    padding: 0 10px;
+}
+.container {
+    padding-top: 80px;
+}
+.card {
+    margin-top: 10px;
+}
+img {
+    width: 100%;
+    height: 100%;
+}

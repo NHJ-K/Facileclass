@@ -1,0 +1,152 @@
+<html lang="en" dir="ltr">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="{% static '/img/icon.png' %}">
+    <title>Facileclass</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="/path/to/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="popup-video.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="app.js"></script>
+    <script src="{% static '/js/app.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style2.css' %}">
+    <script>
+        $('#videoLink')
+            .magnificPopup({
+                type: 'inline',
+                midClick: true
+            })
+    </script>
+    
+</head>
+
+<body>
+    <section id="top">
+   
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <a class="navbar-brand head" href="">School Management System</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </section>
+    <section id="middle">
+    </section>
+   
+
+    {%for mm in context.ls%}
+    {{context.popuplink}}
+    <section id="bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{mm.Tpoicname}}</h3>
+                            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            {{mm.Tpoicdescrip}}<br>
+                            {%for pd in context.pdf%} 
+                            {% if mm.UniqCode == pd.UniqCode %}
+                            <div class="card no1" style="width: 18rem;">
+                                <div class="fontawesome">
+                                    <i class="fas fa-file-pdf fa-5x"></i> {{pd.Name}}
+                                </div>
+
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong{{pd.pdf}}">load</button>
+                                    <div class="modal fade" id="exampleModalLong{{pd.pdf}}" tabindex="-1" role="dialog" style="padding-left: 30%;" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <br><iframe src="https://drive.google.com/file/d/{{pd.pdf}}/preview" width="60%" height="100%"></iframe>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {%endif%} {% endfor %} 
+                            {%for youtube in context.yt%} {% if mm.UniqCode == youtube.UniqCode %}
+                            <div class="card no2" style="width: 18rem;">
+                                <div class="fontawesome">
+
+                                    <i class="fab fa-youtube fa-5x"></i>
+                                </div>
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong1{{pd.pdf}}">load</button>
+
+                                    <div class="modal fade" id="exampleModalLong1{{pd.pdf}}" tabindex="-1" style="padding-left: 28%; padding-top: 10%;" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <iframe id="player" width="603" height="339" src="{{youtube.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {%endif%} {% endfor %} 
+                            {%for l in context.link%} {% if mm.UniqCode == l.UniqCode %}
+                            <div class="card no3" style="width: 18rem;">
+                                <div class="fontawesome">
+                                    <i class="fa fa-link fa-5x" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-body">
+                                    <a href="{{l.link}}" class="btn btn-primary stretched-link">Go somewhere</a>
+                                </div>
+                            </div>
+                            {% endif %} {% endfor %}
+
+
+
+
+
+                            <div class="modal fade" id="{{mm.UniqCode}}exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    {%endfor%}
+</body>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="timingfield.js"></script>
+
+
+</html>
