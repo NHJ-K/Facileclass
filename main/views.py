@@ -77,12 +77,12 @@ def activatea(request):
             user_info.objects.filter(Email=email).update(Activate=True,passwords=passwrd,Name=name)
             messages.error(request, 'Your acount is Activated')
             request.session['mail'] = email
-            return redirect('studl/')
+            return redirect('/')
         elif teacher_info.objects.filter(Email=email).exists():
             teacher_info.objects.filter(Email=email).update(Activate=True,passwords=passwrd,Name=name)
             messages.error(request, 'Your acount is Activated')
             request.session['mail'] = email
-            return redirect('teachl/')
+            return redirect('/')
         else:
             messages.error(request, 'Email not found Contact Admin')
             return redirect('/')
