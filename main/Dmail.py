@@ -3,4 +3,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER ='facileclass1@gmail.com'
+<<<<<<< HEAD
 EMAIL_HOST_PASSWORD = 'NHJ@Ae@1231'
+=======
+EMAIL_HOST_PASSWORD = 'NHJ@Ae@123'
+>>>>>>> 511828d916a0d00f20d3087faf8cdcdd27d451aa
