@@ -61,9 +61,7 @@ def login(response):
                 messages.error(response,'Email not found')
                 return redirect('/')
     return render(response,"index.html")
-def forgetpass(response):
-    return render(response,"fpass.html")
-
+    
 def forgetpassmailsend(request):
     if request.method == "POST":
         print("hi")
