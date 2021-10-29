@@ -1,0 +1,30 @@
+{% extends 'navbar.html' %} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'index.css' %}">
+<body>
+
+    <div class="container ">
+        <h1>Project</h1>
+        <section class="row justify-content-center">
+            <section class="row">
+                <div id="formin">
+
+                    <form class="form-container" action="\fmail" method="POST">
+                        {% csrf_token %}
+                        <h2>Enter details</h2>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="text" required name="U_email" class="form-control" id="exampleInputEmail14" aria-describedby="emailHelp" placeholder="Email">
+                        </div>
+                        <button type="submit"  name="passmail" value="passmail" class="btn btn-primary btn-block">Submit</button>
+                        <hr>
+                </div>
+                </form>
+            </section>
+        </section>
+    </div>
+
+
+
+</body>
+
+{% endblock content %}

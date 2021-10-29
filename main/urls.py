@@ -10,5 +10,7 @@ urlpatterns = [
     path('studl/',include("userl.urls")),
     path('acti/<str:tk>',activation),
     path('active',activatea,name="activatea"),
+    path('fpass',forgetpass),
+    path('fmail',forgetpassmailsend),
     #path('gauth/callback',CallbackV),
 ]
