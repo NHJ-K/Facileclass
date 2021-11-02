@@ -18,6 +18,19 @@ py -m venv env
 ```bash
 pip install -r requirements.txt
 ```
+### Reset DB
+
+```bash
+python manage.py flush
+```
+
+### Update Database
+
+```bash
+python manage.py makeemigrations
+python manage.py migrate
+```
+
 ### Start Web Server
 
 ```bash
