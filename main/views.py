@@ -1,6 +1,9 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render,redirect
+<<<<<<< HEAD
 
+=======
+>>>>>>> d28e0f4 (update)
 from main.mailsender import mailsender
 from .models import *
 from django.contrib import messages 
@@ -65,7 +68,11 @@ def login(response):
 def forgetpassmailsend(request):
     if request.method == "POST":
         print("hi")
+<<<<<<< HEAD
         if request.POST.get("passmail"):
+=======
+        if request.POST.get("btnpass"):
+>>>>>>> d28e0f4 (update)
             print("hh")
             mail = request.POST.get("U_email")
             print(mail)

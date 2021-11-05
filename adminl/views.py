@@ -1,7 +1,11 @@
 from django.shortcuts import render,redirect
 from main.models import *
 from django.contrib import messages
+<<<<<<< HEAD
 from django.http import HttpResponse, HttpResponseRedirect 
+=======
+from django.http import HttpResponseRedirect 
+>>>>>>> d28e0f4 (update)
 from main.mailsender import *
 # Create your views here.
 
