@@ -18,22 +18,12 @@ def gencode():
     
 
 class admin_info(models.Model):
-<<<<<<< HEAD
-
-=======
->>>>>>> d28e0f4 (update)
     Name = models.CharField(max_length=50,unique=False,blank=False)
     Email = models.CharField(max_length=100,unique=True,blank=False,editable=True)
     passwords = models.CharField(max_length=50,unique=False,blank=False,editable=True)
     token=models.CharField(max_length=70,default=None)
 
-<<<<<<< HEAD
 
-
-
-
-=======
->>>>>>> d28e0f4 (update)
 class teacher_info(models.Model):
     Name = models.CharField(max_length=50,unique=False,blank=False)
     Email = models.CharField(max_length=100,unique=True,blank=False,editable=True)
