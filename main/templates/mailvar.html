@@ -1,63 +1,57 @@
-{% extends 'navbar.html' %} {% block content %} {% load static %}
-<link rel="stylesheet" href="{% static 'index.css' %}">
-<script>
-    function passchecker() {
-        var pass1 = document.getElementById("pass1");
-        var pass2 = document.getElementById("pass2");
-        var bt = document.getElementById('Bsub');
-
-        if (pass1.value !=
-            pass2.value) {
-            pass1.value = ''
-            pass2.value = ''
-        } else {
-            bt.disabled = false;
-        }
-
-    }
-</script>
-
-
-
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
 <body>
-
-    <div class="container ">
-        <h1>Project</h1>
-        <section class="row justify-content-center">
-            <section class="row">
-                <div id="formin">
-
-                    <form class="form-container" action="\active" method="POST">
-                        {% csrf_token %}
-                        <h2>Enter details</h2>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email</label>
-                            <input type="text" required name="U_email" class="form-control" id="exampleInputEmail14" aria-describedby="emailHelp" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Name</label>
-                            <input type="text" required name="U_name1" class="form-control" id="Name" aria-describedby="emailHelp" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword12">Password</label>
-                            <input id="pass1" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="U_password1" class="form-control" id="exampleInputPassword12"
-                                placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword6">Conform Pssword</label>
-                            <input type="password" id="pass2" required class="form-control" id="exampleInputPassword6" placeholder="Confirm Password">
-                        </div>
-                        <button type="submit" onclick="passchecker()" name="teachersubmit" value="teachersubmit" class="btn btn-primary btn-block">Submit</button>
-                        <hr>
-                </div>
-                </form>
-            </section>
-        </section>
-    </div>
-
-
-
+	<img class="wave" src="{{% static 'img/wave.png'%}}">
+	<div class="container">
+		<div class="img">
+			<img src="{{% static 'img/bg.svg' %}}">
+		</div>
+		<div class="login-content">
+			<form action="index.html">
+				<!-- <img src="img/logo.png"> -->
+				<h2 class="title">Reset your password</h2>
+				<div class="input-div one">
+					<div class="i">
+						<i class="fas fa-user"></i>
+					</div>
+					<div class="div">
+						<h5>Username</h5>
+						<input type="text" class="input">
+					</div>
+				</div>
+				<div class="input-div pass">
+					<div class="i">
+						<i class="fas fa-lock"></i>
+					</div>
+					<div class="div">
+						<h5>Password</h5>
+						<input type="password" class="input">
+					</div>
+				</div>
+				<div class="input-div pass">
+					<div class="i">
+						<i class="fas fa-lock"></i>
+					</div>
+					<div class="div">
+						<h5>Confirm Password</h5>
+						<input type="password" class="input">
+					</div>
+				</div>
+				<!--<a href="#">Forgot Password?</a>-->
+				<input type="submit" class="btn" value="Submit">
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript" src="{{% static 'js/main.js' %}}"></script>
 </body>
 
-{% endblock content %}
+</html>
