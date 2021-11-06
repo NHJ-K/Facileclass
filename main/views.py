@@ -29,6 +29,7 @@ def login(response):
     if response.method == 'POST':
         if response.POST.get("signin"):
             email = response.POST.get("UL_email")
+            print(email)
             password = response.POST.get("UL_pass")
             if admin_info.objects.filter(Email = email).exists():
                 to = admin_info.objects.get(Email=email)
@@ -97,12 +98,17 @@ def forgetpassmailsend(request):
 
 
 def activation(request,tk):
+    try:
+        ls = teacher_info.objects.filter(token=tk)
+        mail = ls[0].Email
+        request.session['mail'] = mail
+    except :
+        pass
     return render(request,"mailvar.html")
 
 def activatea(request):
-    print('activate')
+    email = request.session['mail']
     if request.method == 'POST':
-        email = request.POST.get("U_email")
         name = request.POST.get("U_name1")
         passwrd = request.POST.get("U_password1")
         if user_info.objects.filter(Email=email).exists():

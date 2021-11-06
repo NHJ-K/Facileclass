@@ -2,30 +2,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="{% static '/css/index.css' %}">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+<script>
+    function passchecker() {
+        var pass1 = document.getElementById("pass1");
+        var pass2 = document.getElementById("pass2");
+        var bt = document.getElementById('Bsub');
 
+        if (pass1.value !=
+            pass2.value) {
+            pass1.value = ''
+            pass2.value = ''
+        } else {
+            bt.disabled = false;
+        }
+
+    }
+</script>
 <body>
-	<img class="wave" src="{{% static 'img/wave.png'%}}">
+	<img class="wave" src="{% static '/img/wave.png'%}">
 	<div class="container">
 		<div class="img">
-			<img src="{{% static 'img/bg.svg' %}}">
+			<img src="{% static '/img/bg.svg' %}">
 		</div>
 		<div class="login-content">
-			<form action="index.html">
+			<form action="{% url 'activatea' %}" method="POST">
 				<!-- <img src="img/logo.png"> -->
-				<h2 class="title">Reset your password</h2>
+				<h2 class="title">Activate Your Account</h2>
 				<div class="input-div one">
 					<div class="i">
 						<i class="fas fa-user"></i>
 					</div>
 					<div class="div">
 						<h5>Username</h5>
-						<input type="text" class="input">
+						<input name="U_name1" type="text" class="input">
 					</div>
 				</div>
 				<div class="input-div pass">
@@ -34,7 +48,7 @@
 					</div>
 					<div class="div">
 						<h5>Password</h5>
-						<input type="password" class="input">
+						<input name="U_password1" id="pass1" type="password" class="input">
 					</div>
 				</div>
 				<div class="input-div pass">
@@ -43,15 +57,15 @@
 					</div>
 					<div class="div">
 						<h5>Confirm Password</h5>
-						<input type="password" class="input">
+						<input id="pass2" type="password" class="input">
 					</div>
 				</div>
 				<!--<a href="#">Forgot Password?</a>-->
-				<input type="submit" class="btn" value="Submit">
+				<input  id="Bsub" type="submit" onclick="passchecker()" name="teachersubmit" class="btn" value="Submit">
 			</form>
 		</div>
 	</div>
-	<script type="text/javascript" src="{{% static 'js/main.js' %}}"></script>
+	<script type="text/javascript" src="{% static '/js/main.js' %}"></script>
 </body>
 
 </html>
