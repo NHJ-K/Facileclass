@@ -2,7 +2,6 @@ from django.db import models
 from datetime import datetime
 import secrets
 import string
-
 from pytz import timezone
 # Create your models here.
 
@@ -25,6 +24,7 @@ class admin_info(models.Model):
 
 
 class teacher_info(models.Model):
+    last_activity = models.DateTimeField(default=datetime.now())
     Name = models.CharField(max_length=50,unique=False,blank=False)
     Email = models.CharField(max_length=100,unique=True,blank=False,editable=True)
     passwords = models.CharField(max_length=100,unique=False,blank=False,editable=True)

@@ -179,13 +179,6 @@ def uploader(respnce,cod,tcod):
                linksave.save()
                return HttpResponseRedirect(respnce.META.get('HTTP_REFERER'))
 
-          
-
-
-
-
-
-
 def Gauthcheck(respnce):
      url=gauth.GetAuthUrl()
      print(url)
