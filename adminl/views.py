@@ -4,13 +4,22 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.http import HttpResponseRedirect 
 from main.mailsender import *
+from django.utils import timezone
 # Create your views here.
 
 def adminp(response):
     try:
         mail = response.session['mail']
         ls=teacher_info.objects.all()
-        return render(response,"admin.html",{'ls':ls})
+        for i in ls:
+            print(i.last_activity)
+            print(timezone.now() - timezone.timedelta(minutes=2))
+            if i.last_activity > timezone.now() - timezone.timedelta(minutes=2):
+                print("hi")
+                status = "Online"
+            else:
+                status = "Offline"
+        return render(response,"admin.html",{'status':status,'ls':ls})
     except KeyError:
         return HttpResponseRedirect('/')
 

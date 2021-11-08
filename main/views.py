@@ -5,6 +5,7 @@ from .models import *
 from django.contrib import messages 
 from django.contrib.messages.api import error,success
 from django.views.decorators.csrf import csrf_protect
+from django.utils import timezone
 
 # Create your views here.
 @csrf_protect
@@ -46,6 +47,9 @@ def login(response):
                     return redirect('/')
                 if to.passwords == password:
                     response.session['mail'] = email
+                    teacher_info.objects.filter(Email=email).update(
+                        last_activity=timezone.now()
+                    )
                     return redirect('/teachl/')
                 else:
                     messages.error(response,'Password Incorrect')
