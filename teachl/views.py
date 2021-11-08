@@ -13,6 +13,7 @@ from django.http import HttpResponseRedirect
 import string
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from main.middleware import process_request
 
 gauth=GoogleAuth()
 
@@ -31,9 +32,10 @@ def teacp(response):
     
 
     
-def logout(response):   
-    response.session.flush()
-    return HttpResponseRedirect('/')
+def logout(response):
+     process_request(response)
+     response.session.flush()
+     return HttpResponseRedirect('/')
 
 
 def createclass_form(request):
