@@ -27,7 +27,7 @@ python manage.py flush
 ### Update Database
 
 ```bash
-python manage.py makeemigrations
+python manage.py makemigrations
 python manage.py migrate
 ```
 
