@@ -8,6 +8,7 @@ from django.utils import timezone
 # Create your views here.
 
 def adminp(response):
+    status = "offline"
     try:
         mail = response.session['mail']
         ls=teacher_info.objects.all()

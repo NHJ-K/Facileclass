@@ -10,6 +10,8 @@ urlpatterns = [
     path('m/<str:cod>/',classpass),
     path('m/<str:cod>/<str:tcod>/add',uploader),
     path('m/<str:cod>/tadder',topicadder),
+    path('m/<str:cod>/addstud',addstud),
     path('callback',callback),
+    path("m/<str:cod>/addstd",addstd),
     #path('m/<str:cod>/delete',deletedrivefile),
 ]

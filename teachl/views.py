@@ -1,9 +1,10 @@
+from os import name
 from django.shortcuts import render,redirect 
 from django.http import HttpResponse, HttpResponseRedirect 
 import string
-from main.models import teacher_info
+from main.models import admin_info, teacher_info
 from teachl.models import *
-from main.models import teacher_info
+from main.models import teacher_info,user_info
 from django.contrib.messages.api import error
 from django.shortcuts import redirect, render
 from main.models import teacher_info,user_info
@@ -14,6 +15,7 @@ import string
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from main.middleware import process_request
+from django.contrib import messages
 
 gauth=GoogleAuth()
 
@@ -31,6 +33,14 @@ def teacp(response):
           return HttpResponseRedirect('/')
     
 
+def gencode():
+    n=60
+    while True:
+        code=''.join(secrets.choice(string.ascii_letters) for x in range(n))
+        if not teacher_info.objects.filter(token=code).exists():
+            if not user_info.objects.filter(token=code).exists():
+                if not admin_info.objects.filter(token=code).exists():
+                    return code
     
 def logout(response):
      process_request(response)
@@ -65,14 +75,16 @@ def classpass(respones,cod):
                          "ls":code.objects.filter(RoomCode=cod),
                          "yt":youtubelink.objects.filter(RoomCode=cod),
                          "link":otherlink.objects.filter(RoomCode=cod),
-                         "popuplink":popupurl
+                         "popuplink":popupurl,
+                         "roomcode":rcod.url
                          }
                else:
                     context={
                          "pdf":contends.objects.filter(RoomCode=cod),
                          "ls":code.objects.filter(RoomCode=cod),
                          "yt":youtubelink.objects.filter(RoomCode=cod),
-                         "link":otherlink.objects.filter(RoomCode=cod)
+                         "link":otherlink.objects.filter(RoomCode=cod),
+                         "roomcode":rcod.url
                          }
                return render(respones, "innerdata.html",{'context':context})
 
@@ -252,3 +264,28 @@ def genaratecode():
           code1=''.join(secrets.choice(string.ascii_letters) for x in range(n))
           if code.objects.filter(UniqCode=code1).count() == 0:
                return code1
+
+
+def addstud(request,cod):
+     print(cod)
+     return render(request,'addstud.html')
+
+def addstd(request,cod):
+     if request.method == 'POST':
+          name = request.POST.get('stdname')
+          email = request.POST.get('stdemail')
+          if not admin_info.objects.filter(Email=email).exists():
+               if not teacher_info.objects.filter(Email=email).exists():
+                    if not user_info.objects.filter(Email=email).exists():
+                         ps = user_info(Email=email,Name=name,token=gencode())
+                         ps.save()
+                    else:
+                         messages.error(request,"Email already exists")
+                         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+               else:
+                    messages.error(request,"Email already exists")
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+          else:
+               messages.error(request,"Email already exists")
+               return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+     return HttpResponse("<h1>added<h1>")
