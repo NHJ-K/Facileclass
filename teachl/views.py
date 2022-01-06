@@ -16,6 +16,7 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from main.middleware import process_request
 from django.contrib import messages
+from userl.models import sroominfo
 
 gauth=GoogleAuth()
 
@@ -268,16 +269,22 @@ def genaratecode():
 
 def addstud(request,cod):
      print(cod)
+     ps = roominfo.objects.filter(url=cod).values()
+     print(ps.values('Roomcode'))
      return render(request,'addstud.html')
 
 def addstd(request,cod):
+     ob = roominfo.objects.filter(url=cod).values()
+     rcode = ob.values('Roomcode')
      if request.method == 'POST':
           name = request.POST.get('stdname')
-          email = request.POST.get('stdemail')
+          email = request.POST.get('stdmail')
           if not admin_info.objects.filter(Email=email).exists():
                if not teacher_info.objects.filter(Email=email).exists():
                     if not user_info.objects.filter(Email=email).exists():
                          ps = user_info(Email=email,Name=name,token=gencode())
+                         ts = sroominfo(Email=email,Roomcode=rcode)
+                         ts.save()
                          ps.save()
                     else:
                          messages.error(request,"Email already exists")
