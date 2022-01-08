@@ -268,10 +268,11 @@ def genaratecode():
 
 
 def addstud(request,cod):
-     print(cod)
+     #print(cod)
      ps = roominfo.objects.filter(url=cod).values()
      print(ps.values('Roomcode'))
-     return render(request,'addstud.html')
+
+     return render(request,'addstud.html',{'context':ps.values('Roomcode')})
 
 def addstd(request,cod):
      ob = roominfo.objects.filter(url=cod).values()
@@ -296,3 +297,7 @@ def addstd(request,cod):
                messages.error(request,"Email already exists")
                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
      return HttpResponse("<h1>added<h1>")
+
+
+def peopl(requset,cod):
+     return render(requset,'people.html')
