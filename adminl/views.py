@@ -12,14 +12,6 @@ def adminp(response):
     try:
         mail = response.session['mail']
         ls=teacher_info.objects.all()
-        for i in ls:
-            print(i.last_activity)
-            print(timezone.now() - timezone.timedelta(minutes=2))
-            if i.last_activity > timezone.now() - timezone.timedelta(minutes=2):
-                print("hi")
-                status = "Online"
-            else:
-                status = "Offline"
         return render(response,"admin.html",{'status':status,'ls':ls})
     except KeyError:
         return HttpResponseRedirect('/')
@@ -44,13 +36,13 @@ def addteach(request):
             if not admin_info.objects.filter(Email=T_mail).exists():
                 if not teacher_info.objects.filter(Email=T_mail).exists():
                     if not user_info.objects.filter(Email=T_mail).exists():
-                        ps = teacher_info(Email=T_mail,token=gencode())
-                        ps.save()
+                        ps = teacher_info(Email=T_mail,token=gencode()) 
                         SUBJECT = "Activate your Account"
                         TEXT = "Follow the link to activate your Account "
                         message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
                         l = mailsender(ps.token,T_mail,message)
                         messages.error(request,"Updated")
+                        ps.save()
                         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
                     else:
                         messages.error(request,"Email already exists")

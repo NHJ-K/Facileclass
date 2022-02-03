@@ -50,9 +50,9 @@
                         {% csrf_token %}
                         <div class="input-icons"> 
                             <i class="fas fa-envelope"></i>                                                       
-                            <input type="email" class="input" name="emailadd" placeholder="Enter Email" required>                            
+                            <input type="text" class="input" name="emailadd" placeholder="Enter Email">                            
                         </div>
-                        <button  type="submit" name="add" value="add" class="btn btn-success">Submit</button>
+                        <button type="submit" name="add" value="add" class="btn btn-success">Submit</button>
                     </form>
                 </div>
             </div>
@@ -81,8 +81,11 @@
                             <td> <img src="{% static '/img/profile.png' %}" alt="profile"> </td>
                            <td> {{mm.Name}}</td>
                             <td>{{mm.Email}} </td>
-                            <td>{{status}}</td>
-                            <td>{{mm.last_activity}}</td>
+                            {% if mm.Activate %}
+                            <td><button type="button" class="btn btn-success">Active</button></td>
+                            {% else %}
+                            <td><button type="button" class="btn btn-danger">Inactive</button></td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tr>

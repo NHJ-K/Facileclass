@@ -277,6 +277,9 @@ def addstud(request,cod):
 def addstd(request,cod):
      ob = roominfo.objects.filter(url=cod).values()
      rcode = ob.values('Roomcode')
+     rname = ob.values('roomname')
+     rurl = ob.values('url')
+     rdesc = ob.values('roomdesc')
      if request.method == 'POST':
           name = request.POST.get('stdname')
           email = request.POST.get('stdmail')
@@ -284,7 +287,7 @@ def addstd(request,cod):
                if not teacher_info.objects.filter(Email=email).exists():
                     if not user_info.objects.filter(Email=email).exists():
                          ps = user_info(Email=email,Name=name,token=gencode())
-                         ts = sroominfo(Email=email,Roomcode=rcode)
+                         ts = sroominfo(Email=email,Roomcode=rcode,roomname=rname,url=rurl,roomdesc=rdesc)
                          ts.save()
                          ps.save()
                     else:
