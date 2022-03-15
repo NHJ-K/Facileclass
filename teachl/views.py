@@ -29,7 +29,7 @@ def teacp(response):
           context = {
                'ls':ls
           }
-          return render(response,"teacher.html",{'context' : context})
+          return render(response,"index2.html",{'context' : context})
      except KeyError:
           return HttpResponseRedirect('/')
     
