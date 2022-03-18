@@ -13,7 +13,7 @@ def userp(response):
     context = {
         'ls':ls
     }
-    return render(response,"userp.html",{'context':context})
+    return render(response,"upage.html",{'context':context})
     
 
     

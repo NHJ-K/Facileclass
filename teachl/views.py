@@ -44,7 +44,6 @@ def gencode():
                     return code
     
 def logout(response):
-     process_request(response)
      response.session.flush()
      return HttpResponseRedirect('/')
 
@@ -114,33 +113,26 @@ def uploader(respnce,cod,tcod):
                     drivepassway=tempuploader(uploadfile=f,tcode=tcod) #storing the multiple pdf in temp uploader
                     drivepassway.save()
           try:
-               print("try")
                gauth.LoadCredentialsFile("creds.json")
                if gauth.credentials is None:
                     return HttpResponseRedirect(gauth.GetAuthUrl())
                elif gauth.access_token_expired:
-                    print("refresh")
                     gauth.Refresh()
                else:
                     print(gauth.credentials)
                     gauth.Authorize()
-                    print("success")
                
                gauth.SaveCredentialsFile("creds.json")
                drive=GoogleDrive(gauth)
                pdffile=tempuploader.objects.all()
                for f in pdffile:
-                    print("hi")
                     ls=code.objects.get(UniqCode=f.tcode) #tcode=topic code (Unique code  a identify the topic)
                     parernt_id=folderspcifing(ls,drive)
                     pathfile= f.uploadfile.path
                     gfile = drive.CreateFile({'parents': [{'id': parernt_id}]})
                     gfile.SetContentFile(pathfile)
-                    print("hi2")
                     gfile.Upload()
-                    print("updone")
                     f.delete()
-                    print("deleted")
                     con=contends(RoomCode=ls.RoomCode,UniqCode=ls.UniqCode,pdf=gfile.get('id'),name=f.uploadfile.name) #drive file  id storing
                     con.save()
                return redirect('/teachl/m/{{tcode}}')

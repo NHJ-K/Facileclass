@@ -11,7 +11,6 @@ drive = GoogleDrive(gauth)
 def driveuploader(ls,file,filename):
     
     pathfile= file
-    print('pass')
     parernt_id=folderspcifing(ls)
     gfile = drive.CreateFile({'parents': [{'id': parernt_id}]})
     gfile.SetContentFile(pathfile)
@@ -26,7 +25,7 @@ def drivedelete(ls):
 
 
 def folderspcifing(ls):
-    foder_title="WEBCLASSROOM"
+    foder_title="FacilClass"
     file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
     folder_id=None
     folder_id_in=None
@@ -47,7 +46,7 @@ def folderspcifing(ls):
     
 
 def createmainfolder():
-    folder_name="WEBCLASSROOM"
+    folder_name="FacilClass"
     folder=drive.CreateFile({'title':folder_name,'mimeType' : 'application/vnd.google-apps.folder'})
     folder.Upload()
     return folder.get('id')
