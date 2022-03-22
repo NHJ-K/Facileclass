@@ -1,29 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
   <meta charset="utf-8">
   <title>Add Classroom|Facileclass</title>
   <!-- <link rel="stylesheet" href="addClassroom.css"> -->
-  <link rel="stylesheet" href="{% static 'addClassroom.css' %}">
+  <link rel="stylesheet" href="{% static 'addClasroom.css' %}">
   
 </head>
 
 <body>
   <div class="center">
     <h1>Add Classroom</h1>
-    <form method="post">
+    <form action="createc" method="post">
+      {% csrf_token %}
       <div class="txt_field">
-        <input type="text" required>
+        <input name="clsname" type="text" required>
         <span></span>
         <label>Class Name</label>
       </div>
       <div class="txt_field">
-        <input type="text" required>
+        <input name="desc" type="text" required>
         <span></span>
         <label>Description</label>
       </div>
-      <input type="submit" value="Submit">
+      <input name="add" type="submit" value="Submit">
     </form>
   </div>
 
