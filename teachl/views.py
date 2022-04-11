@@ -1,22 +1,20 @@
-from os import name
 from django.shortcuts import render,redirect 
 from django.http import HttpResponse, HttpResponseRedirect 
 import string
-from main.models import admin_info, teacher_info
+from main.models import teacher_info
 from teachl.models import *
-from main.models import teacher_info,user_info
-from django.contrib.messages.api import error
+from userl.models import sroominfo
+from main.models import teacher_info,admin_info
 from django.shortcuts import redirect, render
 from main.models import teacher_info,user_info
 from teachl.models import *
-from .drive import drivedelete, driveuploader
 from django.http import HttpResponseRedirect
 import string
+from django.contrib.messages.api import error
+from django.contrib import messages
+
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
-from main.middleware import process_request
-from django.contrib import messages
-from userl.models import sroominfo
 
 gauth=GoogleAuth()
 
@@ -34,18 +32,10 @@ def teacp(response):
           return HttpResponseRedirect('/')
     
 
-def gencode():
-    n=60
-    while True:
-        code=''.join(secrets.choice(string.ascii_letters) for x in range(n))
-        if not teacher_info.objects.filter(token=code).exists():
-            if not user_info.objects.filter(token=code).exists():
-                if not admin_info.objects.filter(token=code).exists():
-                    return code
     
-def logout(response):
-     response.session.flush()
-     return HttpResponseRedirect('/')
+def logout(response):   
+    response.session.flush()
+    return HttpResponseRedirect('/')
 
 
 def createclass_form(request):
@@ -75,16 +65,14 @@ def classpass(respones,cod):
                          "ls":code.objects.filter(RoomCode=cod),
                          "yt":youtubelink.objects.filter(RoomCode=cod),
                          "link":otherlink.objects.filter(RoomCode=cod),
-                         "popuplink":popupurl,
-                         "roomcode":rcod.url
+                         "popuplink":popupurl
                          }
                else:
                     context={
                          "pdf":contends.objects.filter(RoomCode=cod),
                          "ls":code.objects.filter(RoomCode=cod),
                          "yt":youtubelink.objects.filter(RoomCode=cod),
-                         "link":otherlink.objects.filter(RoomCode=cod),
-                         "roomcode":rcod.url
+                         "link":otherlink.objects.filter(RoomCode=cod)
                          }
                return render(respones, "innerdata.html",{'context':context})
 
@@ -109,33 +97,42 @@ def uploader(respnce,cod,tcod):
           #pdf Upload
           if respnce.POST.get('pdfupload'):
                pdffiles=respnce.FILES.getlist('pdffiles') #multi pdf upload
+               dpdf=tempuploader.objects.all()
+               for pd in dpdf:
+                    pd.delete()
                for f in pdffiles: 
                     drivepassway=tempuploader(uploadfile=f,tcode=tcod) #storing the multiple pdf in temp uploader
                     drivepassway.save()
           try:
+               print("try")
                gauth.LoadCredentialsFile("creds.json")
                if gauth.credentials is None:
                     return HttpResponseRedirect(gauth.GetAuthUrl())
                elif gauth.access_token_expired:
+                    print("refresh")
                     gauth.Refresh()
                else:
                     print(gauth.credentials)
                     gauth.Authorize()
+                    print("success")
                
                gauth.SaveCredentialsFile("creds.json")
                drive=GoogleDrive(gauth)
                pdffile=tempuploader.objects.all()
                for f in pdffile:
+                    print("hi")
                     ls=code.objects.get(UniqCode=f.tcode) #tcode=topic code (Unique code  a identify the topic)
                     parernt_id=folderspcifing(ls,drive)
                     pathfile= f.uploadfile.path
                     gfile = drive.CreateFile({'parents': [{'id': parernt_id}]})
                     gfile.SetContentFile(pathfile)
+                    print("hi2")
                     gfile.Upload()
-                    f.delete()
+                    print("updone")
                     con=contends(RoomCode=ls.RoomCode,UniqCode=ls.UniqCode,pdf=gfile.get('id'),name=f.uploadfile.name) #drive file  id storing
                     con.save()
-               return redirect('/teachl/m/{{tcode}}')
+
+               return redirect('/teachl/m/'+cod)
           except FileNotFoundError:
                global popupurl
                popupurl= gauth.GetAuthUrl()
@@ -145,9 +142,7 @@ def uploader(respnce,cod,tcod):
                     drivepassway=tempuploader(uploadfile=f)
                     drivepassway.save()
                     ls=code.objects.get(UniqCode=tcod)
-
                     driveuploader(ls,drivepassway.uploadfile.path,f.name)
-
                     pdf= tempuploader.objects.all() #pdf delete
                     for pd in pdf:
                         pd.delete()
@@ -186,6 +181,13 @@ def uploader(respnce,cod,tcod):
                linksave.save()
                return HttpResponseRedirect(respnce.META.get('HTTP_REFERER'))
 
+          
+
+
+
+
+
+
 def Gauthcheck(respnce):
      url=gauth.GetAuthUrl()
      print(url)
@@ -200,21 +202,26 @@ def callback(request):
         gauth.Auth(cod)
         gauth.SaveCredentialsFile('creds.json')
         drive = GoogleDrive(gauth) 
+        global urladder
         pdffiles=tempuploader.objects.all() #geting all temp uploaded file
         for f in pdffiles:
           ls=code.objects.get(UniqCode=f.tcode) #tcode=topic code (Unique code  a identify the topic)
           parernt_id=folderspcifing(ls,drive)
+          urladder=ls.RoomCode
           pathfile= f.uploadfile.path
+          print('\n'+f.uploadfile.path+'\n')
           gfile = drive.CreateFile({'parents': [{'id': parernt_id}]})
           gfile.SetContentFile(pathfile)
-          gfile.Upload() 
+          gfile.Upload()
+          gfile.InsertPermission({
+                  'role':'reader',
+                  'type':'anyone'
+             })
           con=contends(RoomCode=ls.RoomCode,UniqCode=ls.UniqCode,pdf=gfile.get('id'),name=f.uploadfile.name) #drive file  id storing
           con.save()      
-        pdf= tempuploader.objects.all()
-        for pd in pdf:
-          pd.delete()
-        return redirect('/callback')
-     return render(request,"callback.htnl")
+        reurl='/teachl/m/'+urladder
+        return redirect(reurl)
+     return render(request,"callback.html")
 
      
 
