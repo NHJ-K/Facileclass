@@ -1,0 +1,66 @@
+.bgdiv{
+    background-color: rgb(41, 56, 48);
+    border-radius: 10px;
+    margin-top: 10px;
+    height: 4cm;
+
+}
+.clname{
+    color: #ffffff;
+    font-size: 33px;
+    font-family: 'Google Sans',Roboto,Arial,sans-serif ;
+    padding: 0px 38px 0px 0px;
+}
+.date{
+    color: #ffffff;
+    font-family: 'Google Sans',Roboto,Arial,sans-serif ;
+    padding: 0px 32px 0px 0px;
+}
+.headname{
+    padding-top: 70px;
+    padding-left: 40px;
+    
+}
+
+.cre{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.dropdown-item{
+    font-size:large;
+    
+}
+
+.items{
+   padding-left: 25px;
+}
+
+.title{
+  
+}
+
+.titleimg{
+    margin-left: 10px;
+}
+.upfile{
+   
+    margin-top: 10px;
+}
+
+.topic{
+    width: 15cm;
+    height: 50px;
+}
+.topicicon{
+    float: left;
+}
+.top{
+    padding-left: 30px;
+}
+
+.ssss{
+    padding-left:20px;
+}
+.card{
+    margin-left: 50px;
+    margin-right: 50px;
+}

@@ -1,0 +1,51 @@
+.clname{
+   padding-right: 400px;
+    
+}
+.clmain{
+    border-radius: 10px;
+  
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+.cde{
+    font-size:medium;
+}.card-body{
+    background-color: rgb(251, 251, 251);
+}
+.img-square-wrapper{
+    background-color:rgb(251, 251, 251);
+}
+.sidecdr{
+    background-color: rgb(251, 251, 251);
+}
+
+
+
+
+.bgdiv{
+    background-color: rgb(41, 56, 48);
+    border-radius: 10px;
+    margin-top: 10px;
+    height: 4cm;
+
+}
+.clname{
+    color: #ffffff;
+    font-size: 33px;
+    font-family: 'Google Sans',Roboto,Arial,sans-serif ;
+    padding: 0px 38px 0px 0px;
+}
+.date{
+    color: #ffffff;
+    font-family: 'Google Sans',Roboto,Arial,sans-serif ;
+    padding: 0px 32px 0px 0px;
+}
+.headname{
+    padding-top: 70px;
+    padding-left: 40px;
+    
+}

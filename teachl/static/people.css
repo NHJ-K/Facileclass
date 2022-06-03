@@ -1,0 +1,38 @@
+.clname{
+    padding-right: 400px;
+     
+ }
+ .clmain{
+     border-radius: 10px;
+     background:rgb(41, 56, 48);;
+     
+   
+ }
+ .card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+.cde{
+    font-size:medium;
+}.card-body{
+    background-color: rgb(251, 251, 251);
+}
+.img-square-wrapper{
+    background-color:rgb(251, 251, 251);
+}
+.sidecdr{
+    background-color: rgb(251, 251, 251);
+}
+.addicon{
+    float: right;
+    background-color: rgba(255, 255, 255, 0.927);
+}
+.arange{
+    margin-top: 40px;
+   padding-left: 3cm;
+   padding-right: 3cm;
+}
+
+.admin{
+    height: 30px;
+}

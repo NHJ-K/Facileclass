@@ -1,72 +1,88 @@
-<html>
-  {% load static %}
-  <head>
-  <link rel="stylesheet" href="{% static 'style2.css' %}">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <!-- favicon -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-    <title>Class room</title>
-  </head>
-  <body>
-    <section id="top">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand head" href="">School Management System</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="m/logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+    <link rel="stylesheet" href="people.css">
+    <title>people</title>
+</head>
+<body >
+
+    <section>
+        <div class="container mt-0 navbar justify-content-center fixed-top navbar-light bg-light ">
+            <ul class="nav twonav ">
+              <li class="nav-item ">
+                <a class="nav-link navbar-brand " style="padding-right: 50px; color: black;" href="#">People</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "style="padding-left :50px; color:black;" href="#"> Stream</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "style="padding-left :50px; color:black;" href="#">Class work</a>
+              </li>
+            </ul>
+         </div>
+    
     </section>
-    {% for error in messages %}
-        <div id="message2" class="alert alert-warning alert-dismissible fade show" style="text-align: center;">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>{{error}}</strong>
+    <div class="container p-5 mt-4  shadow-lg text-white text-left clmain">
+        <div class="clname">
+           <h1>Class Name</h1>
+           <p>Date</p> 
         </div>
-    {% endfor %}
-        <a href="addstud" class="float">
-            <i class="fa fa-plus my-float"></i>
-        </a>
-    {% for mm in context.ls %}
-        <section>
-            <div id="services">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href='m/{{mm.url}}' style="outline: none; text-decoration: none; color: none;">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW8cDzm3oxINwFArZExruUNJeLLr0kCAaJe4Swt2RnS-OTsMQBB0w8PHJDQycG4TLiZkM&usqp=CAU" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{mm.roomname}}</h5>
-                                        <p class="card-text">{{mm.roomdesc}}</p>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">Created date: {{mm.date}}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    {% empty %}
-        <h4>No rooms found Create new</h4>
-    {% endfor %}
-  </body>
+       </div>
+    
+       <section class="container arange">
+          <div>
+            <h2 style="float: left;">Teachers</h2>
+           <button  type="button"  style="float: right;" class=" btn btn-light addicon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+              </svg>
+           </button>
+          </div>
+       </section><br><br>
+       <hr  class="container arange">
+
+       <div  class="container arange added">
+        <span> <img   class= " admin rounded-circle" src="https://visualpharm.com/assets/314/Admin-595b40b65ba036ed117d36fe.svg" alt="">  Teacher</span>
+       </div>
+       <div  class="container arange added">
+        <span> <img   class= " admin rounded-circle" src="https://visualpharm.com/assets/314/Admin-595b40b65ba036ed117d36fe.svg" alt="">  Teacher</span>
+       </div>
+
+       <br><br><br>
+
+       <section class="container arange">
+        <div>
+          <h2 style="float: left;">Students</h2>
+          <button  type="button"  style="float: right;" class=" btn btn-light addicon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+              </svg>
+           </button>
+        </div>
+     </section><br><br>
+     <hr  class="container arange">
+
+     <div  class="container arange added">
+        <span> <img   class= " admin rounded-circle" src="https://visualpharm.com/assets/314/Admin-595b40b65ba036ed117d36fe.svg" alt="">  student</span>
+       </div>
+       <div  class="container arange added">
+        <span> <img   class= " admin rounded-circle" src="https://visualpharm.com/assets/314/Admin-595b40b65ba036ed117d36fe.svg" alt="">  student</span>
+       </div>
+
+
+
+
+       <br><br>
+
+       
+   
+</body>
 </html>
