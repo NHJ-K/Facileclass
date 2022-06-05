@@ -1,19 +1,30 @@
-<html>
 {% load static %}
-  <head>
-      <title>Facileclass</title>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  </head>
+    <title>Add Classroom|Facileclass</title>
+    <!-- <link rel="stylesheet" href="addClassroom.css"> -->
+    <link rel="stylesheet" href="{% static 'addClasroom.css' %}">
+
+</head>
+
 <body>
-    <form action="createc" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            <label>Class Code</label>
-            <input name="clsname" class="form-control"  aria-describedby="emailHelp" placeholder="Class Name">
-        </div>
-        <button name="add" value="add" class="btn btn-primary">Submit</button>
-    </form>
+    <div class="center">
+        <h1>Join ClassRoom</h1>
+        <form action="createc" method="post">
+            {% csrf_token %}
+            <div class="txt_field">
+                <input name="clsname" placeholder="Class Code" type="text" required>
+                <span></span>
+                <label>Class Code</label>
+            </div>
+
+            <input name="add" type="submit" value="Submit">
+        </form>
+    </div>
+
 </body>
+
 </html>

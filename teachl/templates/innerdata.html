@@ -29,17 +29,19 @@
                 midClick: true
             })
     </script>
-    
+
 </head>
 
 <body>
- <script>
-            {% if  context.popuplink %}
-                window.location.replace("{{context.popuplink}}");
-            {% endif %}
-        </script>
+    <script>
+        { %
+            if context.popuplink %
+        }
+        window.location.replace("{{context.popuplink}}"); { % endif %
+        }
+    </script>
     <section id="top">
-   
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand head" href="">School Management System</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
@@ -111,9 +113,7 @@
                         </div>
                         <div class="panel-body">
                             {{mm.Tpoicdescrip}}<br>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{mm.UniqCode}}exampleModalCenter">Add Meterial</button> 
-                            {%for pd in context.pdf%} 
-                            {% if mm.UniqCode == pd.UniqCode %}
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{mm.UniqCode}}exampleModalCenter">Add Meterial</button> {%for pd in context.pdf%} {% if mm.UniqCode == pd.UniqCode %}
                             <div class="card no1" style="width: 18rem;">
                                 <div class="fontawesome">
                                     <i class="fas fa-file-pdf fa-5x"></i> {{pd.Name}}
@@ -127,8 +127,7 @@
                                 </div>
 
                             </div>
-                            {%endif%} {% endfor %} 
-                            {%for youtube in context.yt%} {% if mm.UniqCode == youtube.UniqCode %}
+                            {%endif%} {% endfor %} {%for youtube in context.yt%} {% if mm.UniqCode == youtube.UniqCode %}
                             <div class="card no2" style="width: 18rem;">
                                 <div class="fontawesome">
 
@@ -143,8 +142,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {%endif%} {% endfor %} 
-                            {%for l in context.link%} {% if mm.UniqCode == l.UniqCode %}
+                            {%endif%} {% endfor %} {%for l in context.link%} {% if mm.UniqCode == l.UniqCode %}
                             <div class="card no3" style="width: 18rem;">
                                 <div class="fontawesome">
                                     <i class="fa fa-link fa-5x" aria-hidden="true"></i>
@@ -172,7 +170,7 @@
                                             <form action="{{mm.UniqCode}}/add" method="POST" enctype="multipart/form-data">
                                                 {% csrf_token %}
                                                 <div class="file">
-                                                    <div class="file btn btn1 btn-secondary"><input type="file" name="pdffiles" required multiple > <button type="submit" class="btn btn-primary" value="pdfupload" name="pdfupload">submit</button></div>
+                                                    <div class="file btn btn1 btn-secondary"><input type="files" name="pdffiles" required multiple> <button type="submit" class="btn btn-primary" value="pdfupload" name="pdfupload">submit</button></div>
                                                 </div>
                                             </form>
                                             <div class="file">
