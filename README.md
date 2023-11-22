@@ -3,7 +3,7 @@
 # LMS
 My final year college project with <br>
 [@Krishnadas](https://github.com/Krishnadas-KD) <br>
-[@Yaseen](https://github.com/yaseenkc)<br>
+[@Yaseen](https://github.com/yaseen-kc)<br>
 [@Nakhilesh](https://github.com/nakhileship)<br>
 ## Setup Instructions
 
